@@ -4,7 +4,7 @@ const app = express();
 require ('dotenv').config();
 
 const courseRoute = require("./routes/courseRoute");
-const regRoute = require("./Routes/regRoute");
+const regRoute = require("./routes/regRoute");
 const createError = require("http-errors");
 
 require ('./model/dbConnect');
@@ -25,30 +25,30 @@ app.listen(process.env.PORT || 4000, function() {
   
 
 
-//   //handling  errors
-// app.use(async(req, res, next)=>{
-//     next(createError.NotFound())
-// })
+  //handling  errors
+app.use(async(req, res, next)=>{
+    next(createError.NotFound())
+})
 
-// //Error handling middleware 
-// app.use((err, req,res,next)=> {
-//     if (err.status === 401){
-//         //handle 401 unauthorized error 
-//         res.status(401).send({
-//             error: {
-//                 status:401,
-//                 message:"You are not authorised to view this resource"
-//             }
-//         });
-//     }else {
-//         //Handle other errrors
-//         res.status (err.status || 500).send({
-//             error: {
-//                 status:err ||500,
-//                 message: "Internal Server Error",
-//             }
-//         });
-//     }
+//Error handling middleware 
+app.use((err, req,res,next)=> {
+    if (err.status === 401){
+        //handle 401 unauthorized error 
+        res.status(401).send({
+            error: {
+                status:401,
+                message:"You are not authorised to view this resource"
+            }
+        });
+    }else {
+        //Handle other errrors
+        res.status (err.status || 500).send({
+            error: {
+                status:err ||500,
+                message: "Internal Server Error",
+            }
+        });
+    }
 
-// })
+})
 

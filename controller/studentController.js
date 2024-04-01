@@ -22,8 +22,8 @@ module.exports = {
     //get all students
     getAllStudent: async(req, res, next) => {
         try {
-            let student = await student.findAll({})
-            res.status(200).send(customers)
+            let student = await students.findAll({})
+            res.status(200).send(Student)
             
         } catch (error) {
             next(error)
